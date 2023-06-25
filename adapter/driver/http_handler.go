@@ -37,16 +37,6 @@ func (h *HttpHandler) CreateTodoHandler(w http.ResponseWriter, r *http.Request) 
 	w.WriteHeader(http.StatusCreated)
 }
 
-func (h *HttpHandler) GetAllTodosHandler(w http.ResponseWriter, r *http.Request) {
-	todos, err := h.todoService.GetAll()
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	json.NewEncoder(w).Encode(todos)
-}
-
 func (h *HttpHandler) GetTodoHandler(w http.ResponseWriter, r *http.Request) {
 	// ここではリクエストからTodoのIDを取得します
 	// 実際のアプリケーションでは、エラーハンドリングとバリデーションを含むより堅牢な処理が必要になります
@@ -65,4 +55,14 @@ func (h *HttpHandler) GetTodoHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	json.NewEncoder(w).Encode(todo)
+}
+
+func (h *HttpHandler) GetAllTodosHandler(w http.ResponseWriter, r *http.Request) {
+	todos, err := h.todoService.GetAll()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	json.NewEncoder(w).Encode(todos)
 }

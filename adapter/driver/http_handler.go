@@ -16,9 +16,6 @@ func NewHttpHandler(todoService *service.TodoService) *HttpHandler {
 }
 
 func (h *HttpHandler) CreateTodoHandler(w http.ResponseWriter, r *http.Request) {
-	// ここではリクエストからTodoを作成するためのデータを解析します
-	// 実際のアプリケーションでは、エラーハンドリングとバリデーションを含むより堅牢な処理が必要になります
-
 	var todo struct {
 		ID    string `json:"id"`
 		Title string `json:"title"`
@@ -28,7 +25,6 @@ func (h *HttpHandler) CreateTodoHandler(w http.ResponseWriter, r *http.Request) 
 		return
 	}
 
-	// そして、解析したデータを用いてTodoを作成します
 	if err := h.todoService.Create(todo.ID, todo.Title); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -38,16 +34,12 @@ func (h *HttpHandler) CreateTodoHandler(w http.ResponseWriter, r *http.Request) 
 }
 
 func (h *HttpHandler) GetTodoByIdHandler(w http.ResponseWriter, r *http.Request) {
-	// ここではリクエストからTodoのIDを取得します
-	// 実際のアプリケーションでは、エラーハンドリングとバリデーションを含むより堅牢な処理が必要になります
-
 	id := r.URL.Query().Get("id")
 	if id == "" {
 		http.Error(w, "id is required", http.StatusBadRequest)
 		return
 	}
 
-	// そして、取得したIDを用いてTodoを取得します
 	todo, err := h.todoService.GetById(id)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusNotFound)

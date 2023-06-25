@@ -9,16 +9,10 @@ import (
 )
 
 func main() {
-	// In-memory Todoリポジトリを作成
 	repo := driven.NewInMemoryTodoRepository()
-
-	// Todoサービスを作成
 	todoService := service.NewTodoService(repo)
-
-	// HTTPハンドラを作成
 	httpHandler := driver.NewHttpHandler(todoService)
 
-	// 各エンドポイントにハンドラを割り当て
 	http.HandleFunc("/create", httpHandler.CreateTodoHandler)
 	http.HandleFunc("/get", httpHandler.GetTodoByIdHandler)
 	http.HandleFunc("/getall", httpHandler.GetAllTodosHandler)

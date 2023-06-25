@@ -37,7 +37,7 @@ func (h *HttpHandler) CreateTodoHandler(w http.ResponseWriter, r *http.Request) 
 	w.WriteHeader(http.StatusCreated)
 }
 
-func (h *HttpHandler) GetTodoHandler(w http.ResponseWriter, r *http.Request) {
+func (h *HttpHandler) GetTodoByIdHandler(w http.ResponseWriter, r *http.Request) {
 	// ここではリクエストからTodoのIDを取得します
 	// 実際のアプリケーションでは、エラーハンドリングとバリデーションを含むより堅牢な処理が必要になります
 

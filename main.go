@@ -20,7 +20,7 @@ func main() {
 
 	// 各エンドポイントにハンドラを割り当て
 	http.HandleFunc("/create", httpHandler.CreateTodoHandler)
-	http.HandleFunc("/get", httpHandler.GetTodoHandler)
+	http.HandleFunc("/get", httpHandler.GetTodoByIdHandler)
 	http.HandleFunc("/getall", httpHandler.GetAllTodosHandler)
 
 	// ローカルサーバを起動

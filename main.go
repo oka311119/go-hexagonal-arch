@@ -1,6 +1,7 @@
 package main
 
 import (
+	"database/sql"
 	"net/http"
 
 	"github.com/oka311119/go-hexagonal-arch/adapter/driven"
@@ -9,14 +10,30 @@ import (
 )
 
 func main() {
-	repo := driven.NewInMemoryTodoRepository()
-	todoService := service.NewTodoService(repo)
-	httpHandler := driver.NewHttpHandler(todoService)
+	db, err := sql.Open("mysql", "root:example@tcp(db:3306)/todos")
+	if err != nil {
+		panic(err)
+	}
 
-	http.HandleFunc("/create", httpHandler.CreateTodoHandler)
-	http.HandleFunc("/get", httpHandler.GetTodoByIdHandler)
-	http.HandleFunc("/getall", httpHandler.GetAllTodosHandler)
+	repo := driven.NewMySqlTodoRepository(db)
+	svc := service.NewTodoService(repo)
+	handler := driver.NewHttpHandler(svc)
+
+	http.HandleFunc("/create", handler.CreateTodoHandler)
+	http.HandleFunc("/get", handler.GetTodoByIdHandler)
+	http.HandleFunc("/getall", handler.GetAllTodosHandler)
 
 	// ローカルサーバを起動
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":8080", handler)
+
+	// repo := driven.NewInMemoryTodoRepository()
+	// todoService := service.NewTodoService(repo)
+	// httpHandler := driver.NewHttpHandler(todoService)
+
+	// http.HandleFunc("/create", httpHandler.CreateTodoHandler)
+	// http.HandleFunc("/get", httpHandler.GetTodoByIdHandler)
+	// http.HandleFunc("/getall", httpHandler.GetAllTodosHandler)
+
+	// // ローカルサーバを起動
+	// http.ListenAndServe(":8080", nil)
 }

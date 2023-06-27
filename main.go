@@ -24,16 +24,5 @@ func main() {
 	http.HandleFunc("/getall", handler.GetAllTodosHandler)
 
 	// ローカルサーバを起動
-	http.ListenAndServe(":8080", handler)
-
-	// repo := driven.NewInMemoryTodoRepository()
-	// todoService := service.NewTodoService(repo)
-	// httpHandler := driver.NewHttpHandler(todoService)
-
-	// http.HandleFunc("/create", httpHandler.CreateTodoHandler)
-	// http.HandleFunc("/get", httpHandler.GetTodoByIdHandler)
-	// http.HandleFunc("/getall", httpHandler.GetAllTodosHandler)
-
-	// // ローカルサーバを起動
-	// http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":8080", nil)
 }

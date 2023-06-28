@@ -10,17 +10,19 @@ services:
     depends_on:
       - db
   db:
+    container_name: mysql-local
     image: mysql:5.7
     platform: linux/amd64
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: mysql
+      MYSQL_ROOT_PASSWORD: example
       MYSQL_DATABASE: todos
     volumes:
       - db_data:/var/lib/mysql
-      - ./script/init:/docker-entrypoint-initdb.d
+      - ./script/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - 3306:3306
 
 volumes:
+  mysql-local:
   db_data: {}

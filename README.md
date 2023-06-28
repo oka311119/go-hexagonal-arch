@@ -64,3 +64,11 @@ go test ./...
 [] エラーハンドリング
 [] ロギング
 [] ユーザ認証
+
+## 使用しているライブラリ
+
+- gomock
+- errcheck
+- goimports
+- govet
+- staticcheck

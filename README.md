@@ -72,3 +72,11 @@ go test ./...
 - goimports
 - govet
 - staticcheck
+
+## 参考
+
+- https://github.com/golang-standards/project-layout/tree/master/docs
+- https://github.com/knsh14/uber-style-guide-ja/blob/master/guide.md
+- https://google.github.io/styleguide/go/guide
+- https://google.github.io/styleguide/go/decisions
+- https://google.github.io/styleguide/go/best-practices

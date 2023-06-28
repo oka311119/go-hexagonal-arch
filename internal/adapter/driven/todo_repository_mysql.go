@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/oka311119/go-hexagonal-arch/domain/entity"
+	"github.com/oka311119/go-hexagonal-arch/internal/domain/entity"
 )
 
 type MySqlTodoRepository struct {

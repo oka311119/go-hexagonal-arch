@@ -1,8 +1,8 @@
 package service
 
 import (
-	"github.com/oka311119/go-hexagonal-arch/domain/entity"
-	"github.com/oka311119/go-hexagonal-arch/domain/port"
+	"github.com/oka311119/go-hexagonal-arch/internal/domain/entity"
+	port "github.com/oka311119/go-hexagonal-arch/internal/port/secondary"
 )
 
 type TodoService struct {

@@ -4,9 +4,9 @@ import (
 	"database/sql"
 	"net/http"
 
-	"github.com/oka311119/go-hexagonal-arch/adapter/driven"
-	"github.com/oka311119/go-hexagonal-arch/adapter/driver"
-	"github.com/oka311119/go-hexagonal-arch/domain/service"
+	"github.com/oka311119/go-hexagonal-arch/internal/adapter/driven"
+	"github.com/oka311119/go-hexagonal-arch/internal/adapter/driver"
+	service "github.com/oka311119/go-hexagonal-arch/internal/port/primary"
 )
 
 func main() {

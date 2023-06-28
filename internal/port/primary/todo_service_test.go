@@ -3,7 +3,7 @@ package service
 import (
 	"testing"
 
-	"github.com/oka311119/go-hexagonal-arch/adapter/driven"
+	"github.com/oka311119/go-hexagonal-arch/internal/adapter/driven"
 )
 
 func TestTodoService(t *testing.T) {

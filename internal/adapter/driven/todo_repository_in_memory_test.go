@@ -3,7 +3,7 @@ package driven
 import (
 	"testing"
 
-	"github.com/oka311119/go-hexagonal-arch/domain/entity"
+	"github.com/oka311119/go-hexagonal-arch/internal/domain/entity"
 )
 
 func TestInMemoryTodoRepository(t *testing.T) {

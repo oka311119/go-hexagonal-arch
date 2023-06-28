@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/oka311119/go-hexagonal-arch/domain/service"
+	service "github.com/oka311119/go-hexagonal-arch/internal/port/primary"
 )
 
 type HttpHandler struct {
@@ -31,6 +31,16 @@ func (h *HttpHandler) CreateTodoHandler(w http.ResponseWriter, r *http.Request) 
 	}
 
 	w.WriteHeader(http.StatusCreated)
+}
+
+func (h *HttpHandler) GetAllTodosHandler(w http.ResponseWriter, r *http.Request) {
+	todos, err := h.todoService.GetAll()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	json.NewEncoder(w).Encode(todos)
 }
 
 func (h *HttpHandler) GetTodoByIdHandler(w http.ResponseWriter, r *http.Request) {

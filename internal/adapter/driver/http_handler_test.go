@@ -7,8 +7,8 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/oka311119/go-hexagonal-arch/adapter/driven"
-	"github.com/oka311119/go-hexagonal-arch/domain/service"
+	"github.com/oka311119/go-hexagonal-arch/internal/adapter/driven"
+	service "github.com/oka311119/go-hexagonal-arch/internal/port/primary"
 )
 
 // 共通の初期化処理

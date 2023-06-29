@@ -8,14 +8,14 @@ import (
 	"testing"
 
 	"github.com/oka311119/go-hexagonal-arch/internal/adapter/driven"
-	service "github.com/oka311119/go-hexagonal-arch/internal/port/primary"
+	usecase "github.com/oka311119/go-hexagonal-arch/internal/port/primary"
 )
 
 // 共通の初期化処理
 func setup() (*HttpHandler, *httptest.ResponseRecorder) {
 	repo := driven.NewInMemoryTodoRepository()
-	svc := service.NewTodoService(repo)
-	handler := NewHttpHandler(svc)
+	uc := usecase.NewTodoUsecase(repo)
+	handler := NewHttpHandler(uc)
 	rr := httptest.NewRecorder()
 	return handler, rr
 }

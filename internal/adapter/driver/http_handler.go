@@ -4,15 +4,15 @@ import (
 	"encoding/json"
 	"net/http"
 
-	service "github.com/oka311119/go-hexagonal-arch/internal/port/primary"
+	usecase "github.com/oka311119/go-hexagonal-arch/internal/port/primary"
 )
 
 type HttpHandler struct {
-	todoService *service.TodoService
+	todoUsecase *usecase.TodoUsecase
 }
 
-func NewHttpHandler(todoService *service.TodoService) *HttpHandler {
-	return &HttpHandler{todoService: todoService}
+func NewHttpHandler(todoUsecase *usecase.TodoUsecase) *HttpHandler {
+	return &HttpHandler{todoUsecase: todoUsecase}
 }
 
 func (h *HttpHandler) CreateTodoHandler(w http.ResponseWriter, r *http.Request) {
@@ -25,7 +25,7 @@ func (h *HttpHandler) CreateTodoHandler(w http.ResponseWriter, r *http.Request) 
 		return
 	}
 
-	if err := h.todoService.Create(todo.ID, todo.Title); err != nil {
+	if err := h.todoUsecase.Create(todo.ID, todo.Title); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
@@ -34,7 +34,7 @@ func (h *HttpHandler) CreateTodoHandler(w http.ResponseWriter, r *http.Request) 
 }
 
 func (h *HttpHandler) GetAllTodosHandler(w http.ResponseWriter, r *http.Request) {
-	todos, err := h.todoService.GetAll()
+	todos, err := h.todoUsecase.GetAll()
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -50,7 +50,7 @@ func (h *HttpHandler) GetTodoByIdHandler(w http.ResponseWriter, r *http.Request)
 		return
 	}
 
-	todo, err := h.todoService.GetById(id)
+	todo, err := h.todoUsecase.GetById(id)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusNotFound)
 		return

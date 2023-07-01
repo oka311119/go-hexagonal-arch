@@ -7,8 +7,8 @@ package driven
 import (
 	reflect "reflect"
 
-	gomock "github.com/golang/mock/gomock"
-	entity "github.com/oka311119/go-hexagonal-arch/internal/domain/entity"
+	"github.com/golang/mock/gomock"
+	"github.com/oka311119/go-hexagonal-arch/internal/domain/entity"
 )
 
 // MockTodoRepository is a mock of TodoRepository interface.

@@ -4,14 +4,14 @@ import (
 	"encoding/json"
 	"net/http"
 
-	usecase "github.com/oka311119/go-hexagonal-arch/internal/port/primary"
+	port "github.com/oka311119/go-hexagonal-arch/internal/port/primary"
 )
 
 type HttpHandler struct {
-	todoUsecase *usecase.TodoUsecase
+	todoUsecase port.TodoUsecase
 }
 
-func NewHttpHandler(todoUsecase *usecase.TodoUsecase) *HttpHandler {
+func NewHttpHandler(todoUsecase port.TodoUsecase) *HttpHandler {
 	return &HttpHandler{todoUsecase: todoUsecase}
 }
 

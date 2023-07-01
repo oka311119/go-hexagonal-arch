@@ -6,7 +6,7 @@ import (
 
 	"github.com/oka311119/go-hexagonal-arch/internal/adapter/driven"
 	"github.com/oka311119/go-hexagonal-arch/internal/adapter/driver"
-	service "github.com/oka311119/go-hexagonal-arch/internal/port/primary"
+	port "github.com/oka311119/go-hexagonal-arch/internal/port/primary"
 )
 
 func main() {
@@ -16,7 +16,7 @@ func main() {
 	}
 
 	repo := driven.NewMySqlTodoRepository(db)
-	svc := service.NewTodoService(repo)
+	svc := port.NewTodoUsecase(repo)
 	handler := driver.NewHttpHandler(svc)
 
 	http.HandleFunc("/create", handler.CreateTodoHandler)

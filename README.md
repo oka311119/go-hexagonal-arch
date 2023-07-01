@@ -58,9 +58,9 @@ go test ./...
 
 ## 実装したいこと
 
-[] データベースへの接続
-[] mockgenの実装
-[] domain/serviceの修正
+[x] データベースへの接続
+[x] mockgenの実装
+[x] domain/serviceの修正
 [] エラーハンドリング
 [] ロギング
 [] ユーザ認証

@@ -3,7 +3,7 @@ package driven
 import (
 	"errors"
 
-	entity "github.com/oka311119/go-hexagonal-arch/internal/domain/entity"
+	"github.com/oka311119/go-hexagonal-arch/internal/domain/entity"
 	port "github.com/oka311119/go-hexagonal-arch/internal/port/secondary"
 )
 

@@ -20,7 +20,7 @@ func NewTodoUsecase(repo port.TodoRepository) *todoUsecase {
 }
 
 func (s *todoUsecase) Create(id string, title string) error {
-	todo := &entity.Todo{ID: id, Title: title}
+	todo := &entity.Todo{ID: id, Title: title, Completed: false, Duration: nil}
 	return s.repo.Save(todo)
 }
 

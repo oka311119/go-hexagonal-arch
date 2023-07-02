@@ -4,5 +4,7 @@ CREATE TABLE IF NOT EXISTS todos(
   id INT AUTO_INCREMENT,
   title VARCHAR(255) NOT NULL,
   completed BOOLEAN DEFAULT FALSE,
+  duration_start DATETIME,
+  duration_end DATETIME,
   PRIMARY KEY (id)
 );

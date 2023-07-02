@@ -3,9 +3,11 @@ package driven
 import (
 	"database/sql"
 	"fmt"
+	"time"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/oka311119/go-hexagonal-arch/internal/domain/entity"
+	"github.com/oka311119/go-hexagonal-arch/internal/domain/valueobject"
 )
 
 type MySqlTodoRepository struct {
@@ -17,7 +19,7 @@ func NewMySqlTodoRepository(db *sql.DB) *MySqlTodoRepository {
 }
 
 func (repo *MySqlTodoRepository) Save(todo *entity.Todo) error {
-	_, err := repo.db.Exec("INSERT INTO todos (id, title) VALUES (?, ?)", todo.ID, todo.Title)
+	_, err := repo.db.Exec("INSERT INTO todos (id, title, completed, duration_start, duration_end) VALUES (?, ?, ?, ?, ?)", todo.ID, todo.Title, todo.Completed, todo.Duration.Date1, todo.Duration.Date2)
 	if err != nil {
 		return fmt.Errorf("could not save todo to db: %v", err)
 	}
@@ -26,7 +28,7 @@ func (repo *MySqlTodoRepository) Save(todo *entity.Todo) error {
 }
 
 func (repo *MySqlTodoRepository) GetAll() ([]*entity.Todo, error) {
-	rows, err := repo.db.Query("SELECT id, title FROM todos")
+	rows, err := repo.db.Query("SELECT id, title, completed, duration_start, duration_end FROM todos")
 	if err != nil {
 		return nil, fmt.Errorf("could not get todos from db: %v", err)
 	}
@@ -35,10 +37,16 @@ func (repo *MySqlTodoRepository) GetAll() ([]*entity.Todo, error) {
 	var todos []*entity.Todo
 	for rows.Next() {
 		var todo entity.Todo
-		err := rows.Scan(&todo.ID, &todo.Title)
+		var durationStart, durationEnd time.Time
+		err := rows.Scan(&todo.ID, &todo.Title, &todo.Completed, &durationStart, &durationEnd)
 		if err != nil {
 			return nil, fmt.Errorf("could not read row data: %v", err)
 		}
+		todo.Duration, err = valueobject.NewDateRange(durationStart, durationEnd)
+		if err != nil {
+			return nil, fmt.Errorf("could not create date range: %v", err)
+		}
+
 		todos = append(todos, &todo)
 	}
 
